@@ -6,6 +6,17 @@ class EstadoDataStore extends BachesDataAccess{
 
     findRange(_first = 0, _pageSize = 10){
         let promesa = fetch(`${this.BASE_URL}estado/range?first=${_first}&pageSize=${_pageSize}`, {method: "GET"});
+        promesa.then(respuesta=>respuesta.json())
+        .then(j=>console.log(j))
+        .catch(err=>console.error(err));
+        return promesa;
+    }
+
+    findById(_id){
+        let promesa = fetch(`${this.BASE_URL}estado/${_id}`,{method: "GET"});
+        promesa.then(respuesta=>respuesta.json())
+        .then(j=>console.log(j))
+        .catch(err=>console.log(err));
         return promesa;
     }
 
@@ -20,3 +31,10 @@ class EstadoDataStore extends BachesDataAccess{
     }
 }
 export default EstadoDataStore;
+console.log("antes de contar");
+let t = new EstadoDataStore();
+t.contar();
+console.log("despues de contar");
+t.findById(1);
+t.findRange();
+
