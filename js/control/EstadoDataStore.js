@@ -5,9 +5,9 @@ class EstadoDataStore extends BachesDataAccess{
     }
 
     findRange(_first = 0, _pageSize = 10){
-        let promesa = fetch(`${this.BASE_URL}estado/range?first=${_first}&pageSize=${_pageSize}`, {method: "GET"});
+        let promesa = fetch(`${this.BASE_URL}estado?first=${_first}&pageSize=${_pageSize}`, {method: "GET"});
         promesa.then(respuesta=>respuesta.json())
-        .then(j=>console.log(j))
+        .then(j=> console.log(j))
         .catch(err=>console.error(err));
         return promesa;
     }

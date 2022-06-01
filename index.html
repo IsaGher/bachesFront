@@ -8,8 +8,28 @@
     </head>
     <body>
         <div>
-          <h1>Hello World</h1>
+          <input type="button" value="Iniciar" onclick="iniciarWorker()"/>
+          <input type="button" value="Detener" onclick="terminarWorker()"/>
+          <input type="number" name="txtNumero" id="txtNumero"/>
+          <input type="button" value="Reiniciar" onclick="reiniciarCuenta(document.getElementById('txtNumero').value)"/>
         </div>
-        <script type="module" src="./js/control/EstadoDataStore.js"></script>
+        <div id="resultado"></div>
+        <script>
+          function iniciarWorker(){
+            if(typeof(w)=="undefined"){
+              w = new Worker("js/control/worker.js");
+            }
+            w.onmessage = function(event){
+              document.getElementById("resultado").innerHTML = event.data;
+            }
+          }
+          function reiniciarCuenta(_numero){
+            w.postMessage(_numero);
+          }
+          function terminarWorker(){
+            w.terminate();
+            w=undefined;
+          }
+        </script>
     </body>
 </html>
