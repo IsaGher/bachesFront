@@ -1,24 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-      <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-      <title>Title of the document</title>
-    </head>
-    <body>
-      <script type="module" src="../js/boundary/components/AutoComplete.js"></script>
-      <script type="module">
-        import EstadoDataStore from "../js/control/EstadoDataStore.js";
-        let estado = new EstadoDataStore();
-        let datos = await estado.findRange();
-        let promesa = fetch(`${datos.url}`, {method: "GET"});
-        promesa.then(respuesta=>respuesta.json())
-        .then(j=> {console.log(j)})
-        .catch(err=>console.error(err));
-        document.write(
-          '<h1>Autocomplete de entidad Estado</h1><auto-complete fulllist="'+datos.url+'"><input type="text" placeholder="search value" /></auto-complete>'
-        )
-      </script>
-    </body>
+<html>
+
+<head>
+    <title>AutoComplete</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+</head>
+
+<body>
+    AutoComplete:
+    <lit-autocomplete>
+        <input type="text" placeholder="search value" />
+
+
+        <script type="module">
+            import EstadoDataStore from "../js/control/EstadoDataStore.js";
+            let comp = document.querySelector('lit-autocomplete')
+            //console.log(comp)
+            let estado = new EstadoDataStore();
+            let datos = await estado.findRange();
+            let promesa = fetch(`${datos.url}`, { method: "GET" });
+            promesa.then(respuesta => respuesta.json())
+                .then(j => {
+                    console.log("HTML script data", j)
+                    comp.data = j
+                })
+                .catch(err => console.error(err));
+        </script>
+
+
+</body>
+
+<script type="module" src="../js/boundary/components/AutoComplete/AutoCompleteV1.js"></script>
+
 </html>
