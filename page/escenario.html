@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>AutoComplete</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+</head>
+
+<body>
+    AutoComplete:
+    <lit-autocomplete>
+        <input type="text" placeholder="search value" />
+
+
+        <script type="module">
+            import EstadoDataStore from "../js/control/EstadoDataStore.js";
+            let comp = document.querySelector('lit-autocomplete')
+            //console.log(comp)
+            let estado = new EstadoDataStore();
+            let datos = await estado.findRange();
+            let promesa = fetch(`${datos.url}`, { method: "GET" });
+            promesa.then(respuesta => respuesta.json())
+                .then(j => {
+                    console.log("HTML script data", j)
+                    comp.data = j
+                })
+                .catch(err => console.error(err));
+        </script>
+
+
+</body>
+
+<script type="module" src="../js/boundary/components/AutoComplete/AutoCompleteV1.js"></script>
+
+</html>
