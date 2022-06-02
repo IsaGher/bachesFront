@@ -1,9 +1,22 @@
-import {render, html} from "../../lib/lit/lit-html.js";
+import { LitElement, html } from "https://unpkg.com/lit?module"
 import EstadoDataStore from "../../control/EstadoDataStore.js";
 const MAX_MATCHES = 15;
 const NO_RESULTS_MESSAGE_TIME = 5;
 
-export class Autocomplete extends HTMLElement {
+function getDatos(url){
+  return new Promise((resolve, reject)=>{
+    fetch(url).then((response)=>{
+      if(response.ok){
+        return response.json();
+      }
+      reject("Datos no obtenidos, estado: "+response.status);
+    })
+    .then((json) => resolve(json))
+    .catch((err) => reject(err))
+  });
+}
+
+export class Autocomplete extends LitElement {
   static get properties() {
     return {
       fulllist: { type: Array },
@@ -27,15 +40,8 @@ export class Autocomplete extends HTMLElement {
 
     return this._inputEl;
   }
-
-    set fulllist(value) {
-      let estado = new EstadoDataStore();
-      let datos = await estado.findRange();
-      console.log(datos,"aqui estoy");
-      let promesa = fetch(`${datos.url}`, {method: "GET"});
-      promesa.then(respuesta=>respuesta.json())
-        .then(j=> {this.items = j;console.log(this.items)})
-        .catch(err=>console.error(err));
+  get menssaje(){
+    return this.getAttribute("fulllist");
   }
 
   constructor() {
@@ -46,7 +52,6 @@ export class Autocomplete extends HTMLElement {
     this.items = [];
     this.opened = false;
     this.maxSuggestions = MAX_MATCHES;
-    this.root = this.attachShadow({mode:"open"})
   }
 
   firstUpdated() {
@@ -74,6 +79,14 @@ export class Autocomplete extends HTMLElement {
       "keyup",
       this._eventReferences.onKeyUp
     );
+
+      getDatos(this.menssaje).then((dato)=>{
+        this.items= dato;
+        console.log(this.items,"en weeeb",this.items.length);
+      })
+      .catch((err)=>{
+        console.log(err);
+      })
   }
 
   updated(changed) {
@@ -140,10 +153,16 @@ export class Autocomplete extends HTMLElement {
         this._highlightedEl && this._highlightedEl.click();
         break;
       default:
+        getDatos(this.menssaje).then((dato)=>{
+          this.items=dato;
+          console.log(this.items,"en weeeb",this.items.length);
+        })
+        .catch((err)=>{
+          console.log(err);
+        })
         if (this.items.length) {
           var suggestions = [];
           var value = this.contentElement.value;
-
           suggestions =
             value &&
             this.items
@@ -158,7 +177,7 @@ export class Autocomplete extends HTMLElement {
                         .replace(",", "")
                         .replace(/\s/g, "")
                         .toLowerCase()
-                    ) != -1
+                    ) != -1,
               )
 
               .slice(0, this.maxSuggestions);
@@ -247,7 +266,7 @@ export class Autocomplete extends HTMLElement {
     );
   }
 
-  plantilla() {
+  render() {
     return html`
       <style>
         ul {
@@ -299,10 +318,7 @@ export class Autocomplete extends HTMLElement {
       </ul>
     `;
   }
-  set autocomplete(a){
-    render(this.plantilla(),this.root);
-  }
 }
 
-customElements.define("auto-complete", Autocomplete);
+window.customElements.define("auto-complete", Autocomplete);
 

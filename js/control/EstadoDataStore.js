@@ -31,10 +31,3 @@ class EstadoDataStore extends BachesDataAccess{
     }
 }
 export default EstadoDataStore;
-console.log("antes de contar");
-let t = new EstadoDataStore();
-t.contar();
-console.log("despues de contar");
-t.findById(1);
-t.findRange();
-

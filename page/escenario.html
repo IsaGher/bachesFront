@@ -7,7 +7,18 @@
       <title>Title of the document</title>
     </head>
     <body>
-        <h1>Holaaa</h1>
-        <auto-complete fulllist=""></auto-complete>
+      <script type="module" src="../js/boundary/components/AutoComplete.js"></script>
+      <script type="module">
+        import EstadoDataStore from "../js/control/EstadoDataStore.js";
+        let estado = new EstadoDataStore();
+        let datos = await estado.findRange();
+        let promesa = fetch(`${datos.url}`, {method: "GET"});
+        promesa.then(respuesta=>respuesta.json())
+        .then(j=> {console.log(j)})
+        .catch(err=>console.error(err));
+        document.write(
+          '<h1>Autocomplete de entidad Estado</h1><auto-complete fulllist="'+datos.url+'"><input type="text" placeholder="search value" /></auto-complete>'
+        )
+      </script>
     </body>
 </html>
