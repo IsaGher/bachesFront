@@ -15,17 +15,10 @@
 
         <script type="module">
             import EstadoDataStore from "../js/control/EstadoDataStore.js";
-            let comp = document.querySelector('lit-autocomplete')
-            //console.log(comp)
+            let comp = document.querySelector('lit-autocomplete');
             let estado = new EstadoDataStore();
-            let datos = await estado.findRange();
-            let promesa = fetch(`${datos.url}`, { method: "GET" });
-            promesa.then(respuesta => respuesta.json())
-                .then(j => {
-                    console.log("HTML script data", j)
-                    comp.data = j
-                })
-                .catch(err => console.error(err));
+            comp.data = await estado.findAll();
+
         </script>
 
 

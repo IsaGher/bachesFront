@@ -1,12 +1,12 @@
 import BachesDataAccess from "./BachesDataAcces.js";
-class EstadoDataStore extends BachesDataAccess{
+class ObjetoDataStore extends BachesDataAccess{
     constructor() {
         super();
     }
 
     findRange(_first = 0, _pageSize = 10){
         return new Promise((resolve, reject)=>{
-            fetch(`${this.BASE_URL}estado?first=${_first}&pageSize=${_pageSize}`, {method: "GET"}).then(response=>{
+            fetch(`${this.BASE_URL}objeto?first=${_first}&pageSize=${_pageSize}`, {method: "GET"}).then(response=>{
                 if(response.ok){
                     return response.json();
                 }
@@ -19,7 +19,7 @@ class EstadoDataStore extends BachesDataAccess{
 
     findAll(){
         return new Promise((resolve, reject)=>{
-            fetch(`${this.BASE_URL}estado/All`, {method: "GET"}).then(response=>{
+            fetch(`${this.BASE_URL}objeto/All`, {method: "GET"}).then(response=>{
                 if(response.ok){
                     return response.json();
                 }
@@ -32,7 +32,7 @@ class EstadoDataStore extends BachesDataAccess{
 
     findById(_id){
         return new Promise((resolve, reject)=>{
-            fetch(`${this.BASE_URL}estado/${_id}`,{method: "GET"}).then(response=>{
+            fetch(`${this.BASE_URL}objeto/${_id}`,{method: "GET"}).then(response=>{
                 if(response.ok){
                     return response.json();
                 }
@@ -45,7 +45,7 @@ class EstadoDataStore extends BachesDataAccess{
 
     async contar(){
         return new Promise((resolve, reject)=>{
-            fetch(this.BASE_URL+"estado/contar", {method:"GET"}).then(response=>{
+            fetch(this.BASE_URL+"objeto/contar", {method:"GET"}).then(response=>{
                 if(response.ok){
                     return response.json();
                 }
@@ -58,7 +58,7 @@ class EstadoDataStore extends BachesDataAccess{
 
     crear(data){
         return new Promise((resolve, reject)=>{
-            fetch(this.BASE_URL+"estado", {
+            fetch(this.BASE_URL+"objeto", {
                 method:"POST",
                 headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
                 body: JSON.stringify(data)
@@ -75,7 +75,7 @@ class EstadoDataStore extends BachesDataAccess{
 
     modificar(data){
         return new Promise((resolve, reject)=>{
-            fetch(this.BASE_URL+"estado", {
+            fetch(this.BASE_URL+"objeto", {
                 method:"PUT",
                 headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
                 body: JSON.stringify(data)
@@ -92,7 +92,7 @@ class EstadoDataStore extends BachesDataAccess{
 
     eliminar(_id){
         return new Promise((resolve, reject)=>{
-            fetch(`${this.BASE_URL}estado/${_id}`,{method: "DELETE"}).then(response=>{
+            fetch(`${this.BASE_URL}objeto/${_id}`,{method: "DELETE"}).then(response=>{
                 response.json();
             })
             .then((json) => resolve(json))
@@ -100,4 +100,4 @@ class EstadoDataStore extends BachesDataAccess{
         });
     }
 }
-export default EstadoDataStore;
+export default ObjetoDataStore;
