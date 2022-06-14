@@ -4,13 +4,18 @@
 <head>
     <title>Ruta</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
+    <script type="module" src="../js/index/indexRuta.js"></script>
 </head>
 
 <body>
     <h1>Entidad Ruta</h1>
+    <crud-app></crud-app>
 </body>
-
-<!--script type="module" src="../js/boundary/components/AutoComplete.js"></script-->
+<script type="module">
+    import RutaDataStore from "../js/control/RutaDataStore.js";
+    let comp = document.querySelector('crud-app');
+    let ruta = new RutaDataStore();
+    comp.data = await ruta.findAll();
+</script>
 
 </html>

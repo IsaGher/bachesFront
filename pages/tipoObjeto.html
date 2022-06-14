@@ -4,13 +4,18 @@
 <head>
     <title>Tipo Objeto</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
+    <script type="module" src="../js/index/indexTipoObjeto.js"></script>
 </head>
 
 <body>
     <h1>Entidad Tipo-Objeto</h1>
+    <crud-app></crud-app>
 </body>
-
-<!--script type="module" src="../js/boundary/components/AutoComplete.js"></script-->
+    <script type="module">
+        import TipoObjetoDataStore from "../js/control/TipoObjetoDataStore.js";
+        let comp = document.querySelector('crud-app');
+        let tipoObjeto = new TipoObjetoDataStore();
+        comp.data = await tipoObjeto.findAll();
+    </script>
 
 </html>
