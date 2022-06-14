@@ -4,32 +4,9 @@
       <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-      <title>Title of the document</title>
+      <title>Baches</title>
     </head>
     <body>
-        <div>
-          <input type="button" value="Iniciar" onclick="iniciarWorker()"/>
-          <input type="button" value="Detener" onclick="terminarWorker()"/>
-          <input type="number" name="txtNumero" id="txtNumero"/>
-          <input type="button" value="Reiniciar" onclick="reiniciarCuenta(document.getElementById('txtNumero').value)"/>
-        </div>
-        <div id="resultado"></div>
-        <script>
-          function iniciarWorker(){
-            if(typeof(w)=="undefined"){
-              w = new Worker("js/control/worker.js");
-            }
-            w.onmessage = function(event){
-              document.getElementById("resultado").innerHTML = event.data;
-            }
-          }
-          function reiniciarCuenta(_numero){
-            w.postMessage(_numero);
-          }
-          function terminarWorker(){
-            w.terminate();
-            w=undefined;
-          }
-        </script>
+        <h1>Baches</h1>
     </body>
 </html>
