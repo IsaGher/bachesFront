@@ -23,7 +23,9 @@ export default class App extends HTMLElement {
 
     get template() {
       return `
+        <h4>Modificacion de datos</h4>
         <crud-form></crud-form>
+        <h4>Listado</h4>
         <crud-table></crud-table>
         <h4>Crear dato nuevo</h4>
         <crud-form-create></crud-form-create>

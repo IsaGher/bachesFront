@@ -18,7 +18,7 @@ export default class FormCreate extends HTMLElement {
     onSubmit(event) {
       let extra = "T06:00:00Z[UTC]";
       event.preventDefault();
-      const name = document.getElementById("nombre");
+      const name = document.getElementById("nombreC");
       const observacion = document.getElementById("observacionC");
       const fecha = document.getElementById("fechaC").value+extra;
       if (!name.value || !observacion.value) return;
@@ -41,7 +41,7 @@ export default class FormCreate extends HTMLElement {
         <input
           type="text"
           name="name"
-          id="nombre"
+          id="nombreC"
           value="${name}"
           />
           <label for="observacion">Observacion</label>
