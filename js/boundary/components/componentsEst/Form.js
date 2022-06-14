@@ -82,7 +82,7 @@ export default class Form extends HTMLElement {
           id="fecha"
           value="${date}"
         />
-        <input id="submit" type="submit" value="Submit" />
+        <input id="submit" type="submit" value="Modificar" />
       `;
     }
   }

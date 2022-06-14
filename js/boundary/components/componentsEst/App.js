@@ -4,17 +4,12 @@ export default class App extends HTMLElement {
     constructor() {
       super();
       this.estado = new EstadoDataStore();
-      this.characters = [];
       this._data = [];
-      this.ver = [];
   
-      /**
-       * These methods are used as callbacks for event handlers on child elements,
-       * the this would be the child element instead of the Custom Element.
-       */
       this.handleSubmit = this.handleSubmit.bind(this);
       this.handleDelete = this.handleDelete.bind(this);
       this.handleEdit = this.handleEdit.bind(this);
+      this.handleSubmitCreate = this.handleSubmitCreate.bind(this);
   
       const style = document.createElement('style');
       style.innerHTML = this.style;
@@ -30,6 +25,8 @@ export default class App extends HTMLElement {
       return `
         <crud-form></crud-form>
         <crud-table></crud-table>
+        <h4>Crear dato nuevo</h4>
+        <crud-form-create></crud-form-create>
       `;
     }
   
@@ -48,6 +45,10 @@ export default class App extends HTMLElement {
   
     get table() {
       return this.querySelector('crud-table');
+    }
+
+    get formCreate() {
+      return this.querySelector('crud-form-create');
     }
 
     set data(newVal) {
@@ -84,6 +85,17 @@ export default class App extends HTMLElement {
     handleEdit(event) {
       this.editCharacter(event.detail);
     }
+
+    handleSubmitCreate(event){
+      this.newCharacter(event.detail);
+    }
+
+    newCharacter(data){
+      this.estado.crear(data);
+      setTimeout(()=>{
+        location.reload();
+      },1000);
+    }
   
     editCharacter(id) {
         let iD = Number(id);
@@ -98,6 +110,7 @@ export default class App extends HTMLElement {
       this.form.addEventListener('form-submitted', this.handleSubmit);
       this.table.addEventListener('character-deleted', this.handleDelete);
       this.table.addEventListener('character-edited', this.handleEdit);
+      this.formCreate.addEventListener('form-submitted-create', this.handleSubmitCreate);
     }
   }
   
