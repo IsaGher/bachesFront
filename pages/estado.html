@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Estado</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script type="module" src="../js/control/index.js"></script>
+</head>
+
+<body>
+    <h1>Entidad Estado</h1>
+    <crud-app></crud-app>
+</body>
+    <script type="module">
+        import EstadoDataStore from "../js/control/EstadoDataStore.js";
+        let comp = document.querySelector('crud-app');
+        let estado = new EstadoDataStore();
+        comp.data = await estado.findAll();
+    </script>
+<!--script type="module" src="../js/boundary/components/AutoComplete.js"></script-->
+
+</html>

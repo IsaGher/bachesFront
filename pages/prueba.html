@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Pruebass</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+
+<body>
+    <h1>Esto es una prueba</h1>
+    <label htmlFor="fecha">Fecha de creacion</label>
+    <input type="date" name="fecha" id="fecha"/>
+    <input type="submit" value="Submit" onclick="obtener()">
+</body>
+<script>
+    function obtener(){
+        let dato = document.getElementById("fecha").value;
+        console.log(dato);
+    }
+    
+</script>
+</html>
