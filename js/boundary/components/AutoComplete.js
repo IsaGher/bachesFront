@@ -1,70 +1,54 @@
-import { LitElement, html } from "https://unpkg.com/lit?module"
-import EstadoDataStore from "../../control/EstadoDataStore.js";
+import { LitElement, html } from "https://unpkg.com/lit?module";
+
 const MAX_MATCHES = 15;
+
 const NO_RESULTS_MESSAGE_TIME = 5;
 
-function getDatos(url){
-  return new Promise((resolve, reject)=>{
-    fetch(url).then((response)=>{
-      if(response.ok){
-        return response.json();
-      }
-      reject("Datos no obtenidos, estado: "+response.status);
-    })
-    .then((json) => resolve(json))
-    .catch((err) => reject(err))
-  });
-}
-
-export class Autocomplete extends LitElement {
+export class litAutocomplete extends LitElement {
   static get properties() {
     return {
       fulllist: { type: Array },
       opened: { type: Boolean, reflect: true },
-      maxSuggestions: Number
+      maxSuggestions: Number,
     };
   }
-
   get contentElement() {
     if (this._inputEl) {
       return this._inputEl;
     }
-
     var slotInputList = this.shadowRoot
       .getElementById("dropdown-input")
       .assignedNodes()[1];
-
     this._inputEl = slotInputList
       ? slotInputList
       : this.shadowRoot.getElementById("defaultInput");
-
     return this._inputEl;
-  }
-  get menssaje(){
-    return this.getAttribute("fulllist");
   }
 
   constructor() {
     super();
 
     this._eventReferences = {};
-    this._matches = [];
-    this.items = [];
-    this.opened = false;
-    this.maxSuggestions = MAX_MATCHES;
-  }
 
+    this._matches = [];
+
+    this.items = [];
+
+    this.opened = false;
+
+    this.maxSuggestions = MAX_MATCHES;
+
+    this._data = [];
+  }
   firstUpdated() {
     this._suggestionEl = this.shadowRoot.getElementById("suggestions");
     this._suggestionEl.style.width =
       this.contentElement.getBoundingClientRect().width + "px";
-
     this._eventReferences.onFocus = this._onFocus.bind(this);
     this._eventReferences.onBlur = this._onBlur.bind(this);
 
     this._eventReferences.onKeyDown = this._onKeyDown.bind(this);
     this._eventReferences.onKeyUp = this._onKeyUp.bind(this);
-
     this.contentElement.addEventListener(
       "focus",
       this._eventReferences.onFocus
@@ -80,17 +64,22 @@ export class Autocomplete extends LitElement {
       this._eventReferences.onKeyUp
     );
 
-      getDatos(this.menssaje).then((dato)=>{
-        this.items= dato;
-        console.log(this.items,"en weeeb",this.items.length);
-      })
-      .catch((err)=>{
-        console.log(err);
-      })
+    console.log("WebComponent data", this.data);
+    this.items = this.data;
   }
 
+  //static get observedAttributes() {
+  //  return ["data"];
+  //}
+
+  //get data() {
+  //  return this._data;
+  //}
+  set data(newVal) {
+    this._data = newVal;
+  }
   updated(changed) {
-    console.log("updated!!");
+    //console.log("updated!!");
     if (
       changed.has("opened") &&
       this.opened &&
@@ -103,12 +92,10 @@ export class Autocomplete extends LitElement {
       this._highlightedEl.classList.add("active");
     }
   }
-
   disconnectedCallback() {
     if (!this.contentElement) {
       return;
     }
-
     this.contentElement.removeEventListener(
       "keydown",
       this._eventReferences.onKeyDown
@@ -127,13 +114,16 @@ export class Autocomplete extends LitElement {
     );
   }
 
+  ////////////////////////////////////
+  //Events
+  ////////////////////////////////////
+
   _onKeyDown(ev) {
     if (ev.key === "ArrowUp" || ev.key === "ArrowDown") {
       ev.preventDefault();
       ev.stopPropagation();
     }
   }
-
   _onKeyUp(ev) {
     switch (ev.key) {
       case "ArrowUp":
@@ -141,46 +131,34 @@ export class Autocomplete extends LitElement {
         ev.stopPropagation();
         this._markPreviousElement();
         break;
-
       case "ArrowDown":
         ev.preventDefault();
         ev.stopPropagation();
 
         this._markNextElement();
         break;
-
       case "Enter":
         this._highlightedEl && this._highlightedEl.click();
         break;
       default:
-        getDatos(this.menssaje).then((dato)=>{
-          this.items=dato;
-          console.log(this.items,"en weeeb",this.items.length);
-        })
-        .catch((err)=>{
-          console.log(err);
-        })
         if (this.items.length) {
           var suggestions = [];
           var value = this.contentElement.value;
+
           suggestions =
             value &&
             this.items
               .filter(
-                item =>
+                (item) =>
                   item.nombre
                     .replace(",", "")
                     .replace(/\s/g, "")
                     .toLowerCase()
                     .search(
-                      value
-                        .replace(",", "")
-                        .replace(/\s/g, "")
-                        .toLowerCase()
-                    ) != -1,
+                      value.replace(",", "").replace(/\s/g, "").toLowerCase()
+                    ) != -1
               )
-
-              .slice(0, this.maxSuggestions);
+              .slice(0, this.maxSuggestions); // Limit results
 
           if (suggestions.length === 0) {
             suggestions = [];
@@ -201,7 +179,6 @@ export class Autocomplete extends LitElement {
     this._highlightedEl = this._highlightedEl.previousElementSibling;
     this._highlightedEl.classList.add("active");
   }
-
   _markNextElement() {
     if (!this._highlightedEl || !this._highlightedEl.nextElementSibling) {
       return;
@@ -213,40 +190,40 @@ export class Autocomplete extends LitElement {
   }
 
   _onFocus(ev) {
-    console.log("on focus!");
+    //console.log("on focus!");
     this._blur = false;
     this._matches.length && this.open();
   }
-
   _onBlur(ev) {
     this._blur = true;
     !this._mouseEnter && this.close();
   }
-
   _handleItemMouseEnter(ev) {
     this._mouseEnter = true;
   }
 
   _handleItemMouseLeave(ev) {
     this._mouseEnter = false;
-    this._blur && setTimeout(_ => this.close(), 500);
+    this._blur && setTimeout((_) => this.close(), 500);
   }
 
+  ////////////////////////////////////
+  //Methods
+  ////////////////////////////////////
   open() {
-    console.log("open()");
+    //console.log("open()");
     if (this._matches.length) {
       this.opened = true;
     }
   }
 
   close() {
-    console.log("close()");
+    //console.log("close()");
     this.opened = false;
     this._highlightedEl = null;
   }
-
   suggest(suggestions) {
-    console.log("suggest");
+    //console.log("suggest");
     this._matches = suggestions || [];
     this._matches.length ? this.open() : this.close();
     this.requestUpdate();
@@ -261,7 +238,7 @@ export class Autocomplete extends LitElement {
       new CustomEvent("selected-autocomplete", {
         detail: { value, text },
         composed: true,
-        bubbles: true
+        bubbles: true,
       })
     );
   }
@@ -304,14 +281,13 @@ export class Autocomplete extends LitElement {
         @mouseenter=${this._handleItemMouseEnter}
         @mouseleave=${this._handleItemMouseLeave}
       >
-        <!--50-->
         ${this._matches.map(
-          item => html`
+          (item) => html`
             <li
-              @click=${ev =>
-                this.autocomplete(item.text, item.value ? item.value : null)}
+              @click=${(ev) =>
+                this.autocomplete(item.nombre, item.value ? item.value : null)}
             >
-              ${item.text}
+              ${item.nombre}
             </li>
           `
         )}
@@ -320,5 +296,4 @@ export class Autocomplete extends LitElement {
   }
 }
 
-window.customElements.define("auto-complete", Autocomplete);
-
+window.customElements.define("lit-autocomplete", litAutocomplete);
