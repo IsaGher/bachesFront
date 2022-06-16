@@ -79,6 +79,7 @@ export default class App extends HTMLElement {
   
     handleSubmit(event) {
       this.tObjeto.modificar(event.detail);
+      alert("Datos Actualizados");
       setTimeout(()=>{
         location.reload();
       },1000);
@@ -91,6 +92,7 @@ export default class App extends HTMLElement {
     removeCharacter(id) {
       let iD = Number(id);
       this.tObjeto.eliminar(iD);
+      alert("Dato Eliminado");
       setTimeout(()=>{
         location.reload();
       },1000);
@@ -106,6 +108,7 @@ export default class App extends HTMLElement {
 
     newCharacter(data){
       this.tObjeto.crear(data);
+      alert("Nuevo dato agregado");
       setTimeout(()=>{
         location.reload();
       },1000);
