@@ -8,7 +8,12 @@ navbar.innerHTML = `
     justify-content: space-between;
     width: 100%;
     z-index: 99;
+    
+    position: sticky;
+	top: 0;
     margin-bottom:2%
+    
+    
   }
   header div {
     align-items: center;

@@ -1,12 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-      <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-      <title>Baches</title>
-    </head>
-    <body>
-        <h1>Baches</h1>
-    </body>
+  <head>
+    <link rel="stylesheet" href="../style.css" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      type="module"
+      src="../js/boundary/components/componentNavBar/Nav.js"
+    ></script>
+    <title>Baches front-end</title>
+  </head>
+  <body>
+    <navigation-bar active="home" breakpoint="576">
+      <a slot="brand" href="/index.html">TPI135 2022</a>
+      <a href="/pages/estado.html">Estado</a>
+      <a href="/pages/tipoObjeto.html">Tipo Objeto</a>
+      <a href="/pages/objeto.html">Objeto</a>
+      <a href="/pages/objetoEstado.html">Objeto Estado</a>
+      <a href="/pages/ruta.html">Ruta</a>
+    </navigation-bar>
+    <div class="container-fluid center">
+      <h1>API REST + WebComponents</h1>
+      <img class="ues-logo" src="/images/ues.png" alt="UES logo" />
+      <h1>Facultad Multidisciplinaria de Occidente</h1>
+      <h1>Técnicas de Programación para Internet</h1>
+      <h1 style="margin-top: 1%">Integrantes:</h1>
+      <h2>García Herrera, Sara Isabel - GH19009</h2>
+      <h2>Aguirre Hernández, Dennis Giovanni - AH19022</h2>
+    </div>
+  </body>
 </html>

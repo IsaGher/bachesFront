@@ -139,3 +139,17 @@ a{
   color: var(--bgFormEls);
 }
 
+.container-fluid > img {
+  width: 20%;
+  margin: 2%;
+}
+
+.container-fluid > h1,h2 {
+ margin: 0.3%;
+}
+
+.center{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
