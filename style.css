@@ -36,6 +36,12 @@ img {
   height: auto;
 }
 :root {
+  --navbar-bg-color: #afafaf;
+  --navbar-menu-color: #afafaf;
+  --navbar-link-color:  hsl(0, 0%, 10%);
+  --navbar-link-hover-color:#774777;
+  --navbar-link-active-color:#774777;
+
   --white: #afafaf;
   --red: #e31b23;
   --bodyColor: #292a2b;
@@ -91,7 +97,7 @@ padding-top: 25px;
 body {
   font-family: "Barlow Semi Condensed", sans-serif;
   background-color: hsl(0, 0%, 14%);
-  margin: 1.5rem 0;
+  margin: 0;
 }
 
 thead {
@@ -128,3 +134,8 @@ button:hover, button:focus {
   box-shadow: 0 0.5em 0.5em -0.4em var(--white);
   transform: translateY(-0.01em);
 }
+
+a{
+  color: var(--bgFormEls);
+}
+

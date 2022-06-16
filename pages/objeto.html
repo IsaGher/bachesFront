@@ -6,9 +6,18 @@
     <title>Objeto</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <script type="module" src="../js/index/indexObjeto.js"></script>
+             <script type="module" src="../js/boundary/components/componentNavBar/Nav.js"></script>
 </head>
 
 <body>
+    <navigation-bar active="home" breakpoint="576">
+        <a slot="brand" href="#">TPI135 2022</a>
+        <a href="/pages/estado.html">Estado</a>
+        <a href="/pages/tipoObjeto.html">Tipo Objeto</a>
+        <a href="/pages/objeto.html">Objeto</a>
+        <a href="/pages/objetoEstado.html">Objeto Estado</a>
+        <a href="/pages/ruta.html">Ruta</a>
+      </navigation-bar>
     <div class="container-fluid">
     <h1>Entidad Objeto</h1>
     <crud-app></crud-app>
