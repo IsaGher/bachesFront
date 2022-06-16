@@ -91,13 +91,17 @@ export default class Form extends HTMLElement {
   
     formTemplate(id = '', actual = '', date = '' ,observacion = '') {
       return `
+      <h4>Modificacion de datos</h4>
+      <div class="form">
+      <div>
         <input
           type="text"
           name="id"
           id="id"
           value="${id}"
           style="display: none"
-        />
+        /></div>
+        <div>
         <label for="actual">Actual</label>
         <input
           type="text"
@@ -111,14 +115,16 @@ export default class Form extends HTMLElement {
           name="fecha"
           id="fecha"
           value="${date}"
-        />
+        /></div>
+        <div>
           <label for="observacion">Observacion</label>
           <input
           type="text"
           name="observacion"
           id="observacion"
           value="${observacion}"
-        />
+        /></div>
+        <div>
         <label for="nombreEstado">Nombre Estado:</label>
             <select name="nombreEstado" id="nombreEstado">
             ${
@@ -128,7 +134,8 @@ export default class Form extends HTMLElement {
                     `;
                 }).join('')
             }
-            </select>
+            </select></div>
+            <div>
         <label for="nombreObjeto">Nombre Objeto:</label>
             <select name="nombreObjeto" id="nombreObjeto">
             ${
@@ -139,8 +146,9 @@ export default class Form extends HTMLElement {
                 }).join('')
             }
             </select>
+            </div>
         <input id="submit" type="submit" value="Modificar" />
-      `;
+        </div>`;
     }
   }
   

@@ -40,6 +40,8 @@ export default class Table extends HTMLElement {
         detail: id
       });
       this.dispatchEvent(editEvent);
+      document.querySelector("crud-form-create").classList.add('hidden');
+      document.querySelector("crud-form").classList.remove('hidden');
     }
   
     updateTable(characters = []) {
@@ -51,7 +53,7 @@ export default class Table extends HTMLElement {
             <th>Longitud</th>
             <th>Nombre</th>
             <th>Observaciones</th>
-            <th>Actions</th>
+            <th>Opciones</th>
           </tr>
         </thead>
         <tbody>
@@ -65,8 +67,8 @@ export default class Table extends HTMLElement {
                 <td>${character.nombre}</td>
                 <td>${character.observaciones}</td>
                 <td>
-                  <button data-id="${character.idObjeto}" class="delete-btn" >Delete</button>
-                  <button data-id="${character.idObjeto}" class="edit-btn" >Edit</button>
+                  <button data-id="${character.idObjeto}" class="delete-btn" >Borrar</button>
+                  <button data-id="${character.idObjeto}" class="edit-btn" >Editar</button>
                 </td>
             </tr>
             `;

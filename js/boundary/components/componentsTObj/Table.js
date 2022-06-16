@@ -40,6 +40,8 @@ export default class Table extends HTMLElement {
         detail: id
       });
       this.dispatchEvent(editEvent);
+      document.querySelector("crud-form-create").classList.add('hidden');
+      document.querySelector("crud-form").classList.remove('hidden');
     }
   
     updateTable(characters = []) {

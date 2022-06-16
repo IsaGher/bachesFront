@@ -50,6 +50,9 @@ export default class Form extends HTMLElement {
   
     formTemplate(id = '', activo = '', date = '') {
       return `
+      <h4>Modificacion de datos</h4>
+      <div class="form">
+      
         <input
           type="text"
           name="id"
@@ -57,6 +60,7 @@ export default class Form extends HTMLElement {
           value="${id}"
           style="display: none"
         />
+        <div>
         <label for="activo">Activo</label>
         <input
           type="number"
@@ -65,16 +69,17 @@ export default class Form extends HTMLElement {
           min="0"
           max="1"
           value="${activo}"
-          />
+          /></div>
+          <div>
         <label for="fecha">Fecha de creacion</label>
           <input
           type="date"
           name="fecha"
           id="fecha"
           value="${date}"
-        />
+        /></div>
         <input id="submit" type="submit" value="Modificar" />
-      `;
+        </div>`;
     }
   }
   

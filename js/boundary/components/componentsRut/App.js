@@ -21,22 +21,34 @@ export default class App extends HTMLElement {
       this.appendChild(div);
     }
 
+    addButtonListeners() {
+      const newBtn = document.querySelectorAll('.new-btn');
+      newBtn.forEach(btn => btn.addEventListener('click', this.onNew));
+    }
+
+    onNew(e) {
+    console.log("hello there");
+   // document.querySelector("crud-form-create").style.display = "none"; 
+   document.querySelector("crud-form-create").classList.remove('hidden');
+   document.querySelector("crud-form").classList.add('hidden');
+    }
+
     get template() {
       return `
-        <h4>Modificacion de datos</h4>
+      <div class="head-button">
+      <button class="new-btn" >Nuevo</button></div>
         <crud-form></crud-form>
-        <h4>Listado</h4>
-        <crud-table></crud-table>
-        <h4>Crear dato nuevo</h4>
+        
         <crud-form-create></crud-form-create>
+        <div class="table-container">
+        <crud-table></crud-table>
+        </div>
       `;
     }
   
     get style() {
       return `
         .App {
-          max-width: 800px;
-          margin: 0 auto;
         }
       `;
     }
@@ -109,6 +121,9 @@ export default class App extends HTMLElement {
     }
   
     connectedCallback() {
+      document.querySelector("crud-form-create").classList.add('hidden');
+      document.querySelector("crud-form").classList.add('hidden');
+      this.addButtonListeners();
       this.form.addEventListener('form-submitted', this.handleSubmit);
       this.table.addEventListener('character-deleted', this.handleDelete);
       this.table.addEventListener('character-edited', this.handleEdit);

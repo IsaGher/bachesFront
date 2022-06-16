@@ -54,35 +54,42 @@ export default class Form extends HTMLElement {
   
     formTemplate(id = '', name = '', observacion = '', date = '') {
       return `
+      <h4>Modificacion de datos</h4>
+      <div class="form">
+      <div>
         <input
           type="text"
           name="id"
           id="id"
           value="${id}"
           style="display: none"
-        />
+        /></div>
+        <div>
         <label for="name">Nombre</label>
         <input
           type="text"
           name="name"
           id="name"
           value="${name}"
-          />
+          /></div>
+          <div>
           <label for="observacion">Observacion</label>
           <input
           type="text"
           name="observacion"
           id="observacion"
           value="${observacion}"
-        />
+        /></div>
+        <div>
         <label for="fecha">Fecha de creacion</label>
           <input
           type="date"
           name="fecha"
           id="fecha"
           value="${date}"
-        />
+        /></div>
         <input id="submit" type="submit" value="Modificar" />
+        </div>
       `;
     }
   }

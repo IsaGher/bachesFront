@@ -1,0 +1,130 @@
+@import url("https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600&display=swap");
+
+html {
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ol,
+ul {
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+:root {
+  --white: #afafaf;
+  --red: #e31b23;
+  --bodyColor: #292a2b;
+  --borderFormEls: hsl(0, 0%, 10%);
+  --bgFormEls: hsl(0, 0%, 14%);
+  --bgFormElsFocus: hsl(0, 7%, 20%);
+}
+
+.hidden{
+  display:none;
+}
+
+input,
+button {
+  height: 1.5rem;
+  margin: 10px;
+  border: 1px solid var(--borderFormEls);
+  color: var(--white);
+  background: var(--bgFormEls);
+ 
+}
+
+button {
+  width: auto;
+  height: auto;
+  padding: 10px;
+}
+
+button:active {
+  background: var(--bodyColor);
+  
+  }
+.container-fluid {
+  width: 95%;
+  margin: 0 auto;
+}
+
+.form {
+  align-items: center;
+  flex-wrap: wrap;
+  border: 1px solid var(--borderFormEls);
+  background-color: var(--bodyColor);
+  font-size: 1rem;
+  padding: 2%;
+  display: flex;
+  justify-content: space-between;
+  margin: 3%;
+}
+h4{font-size: 1.4rem;
+padding-left: 3%;
+padding-top: 25px;
+}
+body {
+  font-family: "Barlow Semi Condensed", sans-serif;
+  background-color: hsl(0, 0%, 14%);
+  margin: 1.5rem 0;
+}
+
+thead {
+  margin: 2%;
+  color: var(--white);
+  background-color: var(--bodyColor);
+  font-size: large;
+  font-family: "Barlow Semi Condensed", sans-serif;
+}
+th,
+td {
+  padding: 5px 12px;
+  text-align: center;
+}
+
+tr:nth-child(even) {
+  background-color: var(--bodyColor);
+}
+* {
+  color: var(--white);
+}
+
+table {
+  width: 90%;
+
+  margin: 0 auto;
+}
+
+h1{
+  margin-left: 1%;
+}
+
+button:hover, button:focus {
+  box-shadow: 0 0.5em 0.5em -0.4em var(--white);
+  transform: translateY(-0.01em);
+}

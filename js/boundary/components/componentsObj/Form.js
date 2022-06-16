@@ -69,6 +69,9 @@ export default class Form extends HTMLElement {
   
     formTemplate(id = '', name = '', observacion = '', latitud = '', longitud = '') {
       return `
+      <h4>Modificacion de datos</h4>
+      <div class="form">
+      <div class="name-section">
         <input
           type="text"
           name="id"
@@ -83,6 +86,8 @@ export default class Form extends HTMLElement {
           id="name"
           value="${name}"
           />
+          </div>
+          <div class="observation-section">
           <label for="observacion">Observacion</label>
           <input
           type="text"
@@ -90,6 +95,8 @@ export default class Form extends HTMLElement {
           id="observacion"
           value="${observacion}"
         />
+        </div>
+        <div class="latitud-section">
         <label for="latitud">Latitud</label>
           <input
           type="text"
@@ -97,6 +104,8 @@ export default class Form extends HTMLElement {
           id="latitud"
           value="${latitud}"
         />
+        </div>
+        <div class="longitud-section">
         <label for="longitud">Longitud</label>
           <input
           type="text"
@@ -104,6 +113,8 @@ export default class Form extends HTMLElement {
           id="longitud"
           value="${longitud}"
         />
+        </div>
+        <div class="activo-section">
         <label for="activo">Tipo Objeto:</label>
             <select name="activo" id="activo">
             ${
@@ -114,7 +125,9 @@ export default class Form extends HTMLElement {
                 }).join('')
             }
             </select>
+            </div>
         <input id="submit" type="submit" value="Modificar" />
+        </div>
       `;
     }
   }

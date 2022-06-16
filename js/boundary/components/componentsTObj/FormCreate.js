@@ -33,6 +33,10 @@ export default class FormCreate extends HTMLElement {
   
     formTemplate(activo = '', date = '') {
         return `
+        <div class="form-create">
+        <h4>Crear dato nuevo</h4>
+        <div class="form">
+        <div>
           <label for="activo">Activo</label>
           <input
             type="number"
@@ -41,15 +45,18 @@ export default class FormCreate extends HTMLElement {
             min="0"
             max="1"
             value="${activo}"
-            />
+            /></div>
+            <div>
           <label for="fecha">Fecha de creacion</label>
             <input
             type="date"
             name="fecha"
             id="fechaC"
             value="${date}"
-          />
+          /></div>
           <input id="submit" type="submit" value="Crear" />
+          </div>
+          </div>
         `;
       }
   }

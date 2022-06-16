@@ -46,20 +46,26 @@ export default class FormCreate extends HTMLElement {
   
     formTemplate(name = '', observacion = '', date = '') {
       return `
+      <div class="form-create">
+      <h4>Crear dato nuevo</h4>
+      <div class="form">
+      <div>
         <label for="name">Nombre</label>
         <input
           type="text"
           name="name"
           id="nombreC"
           value="${name}"
-          />
+          /></div>
+          <div>
           <label for="observacion">Observacion</label>
           <input
           type="text"
           name="observacion"
           id="observacionC"
           value="${observacion}"
-        />
+        /></div>
+        <div>
         <label for="fecha">Fecha de creacion</label>
           <input
           type="date"
@@ -67,7 +73,10 @@ export default class FormCreate extends HTMLElement {
           id="fechaC"
           value="${date}"
         />
+        </div>
         <input id="submit" type="submit" value="Crear" />
+        </div>
+        </div>
       `;
     }
   }

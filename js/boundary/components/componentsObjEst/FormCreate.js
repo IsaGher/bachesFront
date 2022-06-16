@@ -71,20 +71,26 @@ export default class FormCreate extends HTMLElement {
   
     formTemplate(actual = '', date = '', observacion = '') {
       return `
+      <div class="form-create">
+      <h4>Crear dato nuevo</h4>
+      <div class="form">
+      <div>
         <label for="actual">Actual</label>
         <input
           type="text"
           name="actual"
           id="actualC"
           value="${actual}"
-          />
+          /></div>
+          <div>
           <label for="fecha">Fecha Alcanzado</label>
           <input
           type="date"
           name="fecha"
           id="fechaC"
           value="${date}"
-        />
+        /></div>
+        <div>
           <label for="observacion">Observacion</label>
           <input
           type="text"
@@ -92,6 +98,8 @@ export default class FormCreate extends HTMLElement {
           id="observacionC"
           value="${observacion}"
         />
+        </div>
+        <div>
         <label for="nombreEstado">Nombre Estado:</label>
             <select name="nombreEstado" id="nombreEstadoC">
             ${
@@ -102,6 +110,8 @@ export default class FormCreate extends HTMLElement {
                 }).join('')
             }
             </select>
+            </div>
+            <div>
         <label for="nombreObjeto">Nombre Objeto:</label>
             <select name="nombreObjeto" id="nombreObjetoC">
             ${
@@ -112,7 +122,10 @@ export default class FormCreate extends HTMLElement {
                 }).join('')
             }
             </select>
+            </div>
         <input id="submit" type="submit" value="Crear" />
+        </div>
+        </div>
       `;
     }
   }
