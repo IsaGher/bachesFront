@@ -55,7 +55,7 @@ img {
 }
 
 input,
-button {
+button,select {
   height: 1.5rem;
   margin: 10px;
   border: 1px solid var(--borderFormEls);

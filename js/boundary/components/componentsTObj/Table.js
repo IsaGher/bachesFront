@@ -48,9 +48,10 @@ export default class Table extends HTMLElement {
       this.table.innerHTML = `
         <thead>
           <tr>
+            <th>Id</th>
             <th>Activo</th>
             <th>Fecha de Creacion</th>
-            <th>Actions</th>
+            <th>Opciones</th>
           </tr>
         </thead>
         <tbody>
@@ -58,11 +59,12 @@ export default class Table extends HTMLElement {
             .map((character, index) => {
               return `
               <tr>
+              <td>${character.idTipoObjeto}</td>
                 <td>${character.activo}</td>
                 <td>${character.fechaCreacion}</td>
                 <td>
-                  <button data-id="${character.idTipoObjeto}" class="delete-btn" >Delete</button>
-                  <button data-id="${character.idTipoObjeto}" class="edit-btn" >Edit</button>
+                  <button data-id="${character.idTipoObjeto}" class="delete-btn" >Borrar</button>
+                  <button data-id="${character.idTipoObjeto}" class="edit-btn" >Editar</button>
                 </td>
             </tr>
             `;

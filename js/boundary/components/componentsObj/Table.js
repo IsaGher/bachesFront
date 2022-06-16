@@ -48,6 +48,7 @@ export default class Table extends HTMLElement {
       this.table.innerHTML = `
         <thead>
           <tr>
+            <th>Id</th>
             <th>Tipo Objeto (activo)</th>
             <th>Latitud</th>
             <th>Longitud</th>
@@ -61,6 +62,7 @@ export default class Table extends HTMLElement {
             .map((character, index) => {
               return `
               <tr>
+              <td>${character.idObjeto}</td>
                 <td>${character.idTipoObjeto.activo}</td>
                 <td>${character.latitud}</td>
                 <td>${character.longitud}</td>

@@ -22,11 +22,19 @@ export default class Form extends HTMLElement {
       const id = this.querySelector('#id');
       const activo = this.querySelector('#activo');
       const fecha = document.getElementById("fecha").value+extra;
+      let act = new Boolean()
+      if(activo.value === "false"){
+        act = false;
+      }else if(activo.value === "true"){
+        act = true;
+      }else{
+        return
+      }
       if (!activo.value) return;
   
       const submitEvent = new CustomEvent('form-submitted', {
         detail: {
-          activo: activo.value,
+          activo: act,
           fechaCreacion:fecha,
           idTipoObjeto: id.value
         }
@@ -43,12 +51,18 @@ export default class Form extends HTMLElement {
         }
       this.form.innerHTML = this.formTemplate(
         event.detail.idTipoObjeto,
-        event.detail.activo,
         fecha
       );
+      const activo = this.querySelector('#activo');
+      if(event.detail.activo){
+        activo.value = "true";
+      }else{
+        activo.value = "false";
+      }
+
     }
   
-    formTemplate(id = '', activo = '', date = '') {
+    formTemplate(id = '', date = '') {
       return `
       <h4>Modificacion de datos</h4>
       <div class="form">
@@ -62,14 +76,11 @@ export default class Form extends HTMLElement {
         />
         <div>
         <label for="activo">Activo</label>
-        <input
-          type="number"
-          name="activo"
-          id="activo"
-          min="0"
-          max="1"
-          value="${activo}"
-          /></div>
+            <select name="activo" id="activo">
+              <option value="true">True</option>
+              <option value="false">False</option>
+            </select>
+        </div>
           <div>
         <label for="fecha">Fecha de creacion</label>
           <input

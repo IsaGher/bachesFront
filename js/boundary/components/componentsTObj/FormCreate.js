@@ -20,6 +20,14 @@ export default class FormCreate extends HTMLElement {
       event.preventDefault();
       const activo = document.getElementById("activoC");
       const fecha = document.getElementById("fechaC").value+extra;
+      let act = new Boolean()
+      if(activo.value === "false"){
+        act = false;
+      }else if(activo.value === "true"){
+        act = true;
+      }else{
+        return
+      }
       if (!activo.value) return;
   
       const submitEvent = new CustomEvent('form-submitted-create', {
@@ -31,21 +39,18 @@ export default class FormCreate extends HTMLElement {
       this.dispatchEvent(submitEvent);
     }
   
-    formTemplate(activo = '', date = '') {
+    formTemplate(date = '') {
         return `
         <div class="form-create">
         <h4>Crear dato nuevo</h4>
         <div class="form">
         <div>
-          <label for="activo">Activo</label>
-          <input
-            type="number"
-            name="activo"
-            id="activoC"
-            min="0"
-            max="1"
-            value="${activo}"
-            /></div>
+        <label for="activo">Activo</label>
+            <select name="activo" id="activoC">
+              <option value="true">True</option>
+              <option value="false">False</option>
+            </select>
+          </div>
             <div>
           <label for="fecha">Fecha de creacion</label>
             <input
